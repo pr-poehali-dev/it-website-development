@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 
@@ -20,13 +20,6 @@ const NAV_ITEMS = [
 
 const HeroSection = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const scrollTo = (href: string) => {
     setMobileMenu(false);
@@ -36,10 +29,10 @@ const HeroSection = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'backdrop-blur-xl bg-background/80 border-b border-border/50 shadow-lg shadow-background/20' : 'bg-transparent border-b border-transparent'}`}>
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/50">
         <div className="container mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <button onClick={() => scrollTo('#hero')} className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-lg gradient-primary flex items-center justify-center group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-lg gradient-primary flex items-center justify-center">
               <Icon name="Zap" size={18} className="text-white" />
             </div>
             <span className="font-heading font-bold text-lg tracking-tight">TechCore</span>
@@ -98,19 +91,16 @@ const HeroSection = () => {
       </header>
 
       <section id="hero" className="relative min-h-screen flex items-center pt-16 noise-bg overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-[0.03]" />
-
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[120px] animate-pulse-glow" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px] animate-pulse-glow" style={{ animationDelay: '1.5s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[150px] animate-pulse-glow" style={{ animationDelay: '3s' }} />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="animate-in-view">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-8">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <Icon name="Shield" size={14} />
                 Надёжные ИТ-решения для бизнеса
               </span>
             </div>
@@ -147,8 +137,8 @@ const HeroSection = () => {
 
             <div className="animate-in-view stagger-4 mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
               {STATS.map((stat, i) => (
-                <div key={i} className="text-center group">
-                  <div className="font-heading font-800 text-2xl sm:text-3xl gradient-text mb-1 group-hover:scale-110 transition-transform duration-300">{stat.value}</div>
+                <div key={i} className="text-center">
+                  <div className="font-heading font-800 text-2xl sm:text-3xl gradient-text mb-1">{stat.value}</div>
                   <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
