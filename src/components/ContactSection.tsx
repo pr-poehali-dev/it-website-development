@@ -191,7 +191,7 @@ const ContactSection = () => {
             </nav>
 
             <div className="text-sm text-muted-foreground">
-              © 2024 TechCore. Все права защищены.
+              © 2025 TechCore. Все права защищены.
             </div>
           </div>
         </div>
